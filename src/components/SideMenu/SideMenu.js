@@ -1,25 +1,43 @@
 import React from 'react';
-import {NavigationActions} from 'react-navigation';
-import {ScrollView, Text, View} from 'react-native';
+import { NavigationActions, DrawerItems } from 'react-navigation';
+import {ScrollView, Text, View, SafeAreaView, Dimensions , StyleSheet, Image} from 'react-native';
+
 
 class SideMenu extends React.Component {
 
-  render () {
+  constructor(props) {
+    super(props)
+  }
+
+  render () { 
     return (
-      <View>
-        <ScrollView>
-          <View>
-              <Text onPress={ () => this.props.navigation.navigate('Home')}>
-              Home
-              </Text>
-          </View>
-        </ScrollView>
-        <View>
-          <Text>This is my fixed footer</Text>
+      <SafeAreaView style={{flex: 1}}>
+        <View style={styles.headerContent}>
+            <Image 
+              source={require('./../../assets/imgs/logo.png')} 
+              style={styles.logo}
+            />
         </View>
-      </View>
+        <ScrollView>
+          <DrawerItems {... this.props} />
+        </ScrollView>
+      </SafeAreaView>
     );
   }
 }
 
-export default SideMenu;
+const styles = StyleSheet.create({
+  headerContent:{
+    display: 'flex',
+    height:150,
+    backgroundColor: '#f4511e',
+    alignItems: 'center',
+    justifyContent: 'center'
+  },
+  logo: {
+    height: 140,
+    width: 210,
+  }
+})
+
+export default SideMenu; 
